@@ -19,3 +19,12 @@ jQuery('body').ready(function() {
     '</script>' +
     '</div>').prependTo('body');
 });
+
+jQuery( window ).load(function() {
+    var ad_tag = '#' + wallpaper_tag;
+    var ad = jQuery(ad_tag + ' iframe');
+    var ad_pos = jQuery(ad_tag);
+    ad_pos.css('background-image', 'url(' + ad.contents().find('img').attr('src') + ')');
+    ad.contents().find('img').hide();
+    console.log(ad.contents().find('img').attr('src'));
+});

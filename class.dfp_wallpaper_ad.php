@@ -112,13 +112,14 @@ class DFP_Wallpaper_Ad {
 	public function css_style() {
 		?>
 		<style type="text/css">
-			#<?php _e( $this->ad_position->position_tag ); ?>-oop {
+			#<?php _e( $this->ad_position->position_tag ); ?> {
 				position: fixed;
 				top: 0;
 				left: 0;
 				width: 100%;
 				height: 100%;
 				z-index: -1;
+				background-size: cover;
 			}
 		</style>
 	<?php
