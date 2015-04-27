@@ -112,14 +112,18 @@ class DFP_Wallpaper_Ad {
 	public function css_style() {
 		?>
 		<style type="text/css">
-			#<?php _e( $this->ad_position->position_tag ); ?> {
+			.dfp_wallpaper_ad > div {
 				position: fixed;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 100%;
+				width: 100% !important;
+				height: 100% !important;
 				z-index: -1;
 				background-size: cover;
+			}
+			.dfp_wallpaper_ad > div > iframe {
+				width: 100% !important;
+				height: 100% !important;
 			}
 		</style>
 	<?php

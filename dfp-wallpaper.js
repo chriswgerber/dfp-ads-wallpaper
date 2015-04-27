@@ -12,19 +12,10 @@ jQuery('body').ready(function() {
     '</script>' +
     '</div>' +
     '<!-- Roadblock out-of-page div -->' +
-    '<div id="' + wallpaper_tag + '-oop">' +
+    '<div id="' + wallpaper_tag + '-oop" class="dfp_wallpaper_ad">' +
     '<script type="text/javascript">' +
     'googletag.cmd.push(function() { ' +
     'googletag.display("' + wallpaper_tag + '-oop"); });' +
     '</script>' +
     '</div>').prependTo('body');
-});
-
-jQuery( window ).load(function() {
-    var ad_tag = '#' + wallpaper_tag;
-    var ad = jQuery(ad_tag + ' iframe');
-    var ad_pos = jQuery(ad_tag);
-    ad_pos.css('background-image', 'url(' + ad.contents().find('img').attr('src') + ')');
-    ad.contents().find('img').hide();
-    console.log(ad.contents().find('img').attr('src'));
 });
