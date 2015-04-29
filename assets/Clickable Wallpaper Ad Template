@@ -1,0 +1,58 @@
+{
+  "name": "Clickable Wallpaper Ad",
+  "description": "Clickable Wallpaper ad with tracking. No Rich Media",
+  "variables": [
+    {
+      "mimeTypes": [
+        "GIF",
+        "PNG",
+        "JPG"
+      ],
+      "label": "ImageFile",
+      "uniqueName": "ImageFile",
+      "description": "Background Image",
+      "isRequired": true,
+      "variableType": "ASSET"
+    },
+    {
+      "isTrackingUrl": false,
+      "urlType": "STANDARD_HTTP",
+      "label": "ClickthroughURL",
+      "uniqueName": "ClickthroughURL",
+      "description": "Landing URL",
+      "isRequired": true,
+      "variableType": "URL"
+    },
+    {
+      "choices": [
+        {
+          "label": "_blank",
+          "value": "_blank"
+        },
+        {
+          "label": "_top",
+          "value": "_top"
+        }
+      ],
+      "allowOtherChoice": false,
+      "defaultValue": "_blank",
+      "label": "Target Window",
+      "uniqueName": "TargetWindow",
+      "isRequired": true,
+      "variableType": "LIST"
+    },
+    {
+      "isTrackingUrl": false,
+      "urlType": "STANDARD_HTTP",
+      "label": "TrackingPixel",
+      "uniqueName": "TrackingPixel",
+      "isRequired": false,
+      "variableType": "URL"
+    }
+  ],
+  "formatter": "\u003cdiv style\u003d\"margin:0;padding:0;background-size:cover;background-image:url(\u0027[%ImageFile%]\u0027);position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;\"\u003e\n    \u003ca href\u003d\"%%CLICK_URL_UNESC%%[%ClickthroughURL%]\" target\u003d\"_[%TargetWindow%]\"\u003e\u003cimg src\u003d\"%%VIEW_URL_ESC%%\" style\u003d\"width:100%;height:100%;\" /\u003e\u003c/a\u003e\n\n\u003cdiv style\u003d\"position:absolute;top:0px;right:0px;width:1px;height:1px;visibility:hidden;border:none;\"\u003e\n    \u003cscript type\u003d\"text/javascript\"\u003e\n        var trackingPixel\u003d\"[%TrackingPixel%]\";if(trackingPixel.indexOf(\"http\")\u003d\u003d0)document.write(\u0027\u003ciframe src\u003d\"\u0027+trackingPixel+\u0027\" height\u003d\"1\" width\u003d\"1\" style\u003d\"width:1px !important;height 1px !important\"\u003e\u003c/iframe\u003e\u0027);\n    \u003c/script\u003e\n\u003c/div\u003e\n",
+  "type": "USER_DEFINED",
+  "isInterstitial": true,
+  "isNativeEligible": false,
+  "isSafeFrameCompatible": true
+}

@@ -17,7 +17,7 @@
  * The Plugin File
  *
  * @link              http://www.chriswgerber.com/dfp-ads/wallpaper
- * @since             0.0.1
+ * @since             0.1.0
  * @subpackage        DFP-Ads-Wallpaper
  */
 
@@ -26,7 +26,7 @@ function dfp_wallpaper_init() {
 
 		/** Queueing up the Wallpaper ad */
 		global $dfp_ads;
-		include( 'class.dfp_wallpaper_ad.php' );
+		include( 'assets/class.dfp_wallpaper_ad.php' );
 		$wallpaper_ad          = new DFP_Wallpaper_Ad ( $dfp_ads );
 		$wallpaper_ad->dir_uri = plugins_url( null, __FILE__ );
 		$position_title        = dfp_get_settings_value( 'dfp_wallpaper_id' );
