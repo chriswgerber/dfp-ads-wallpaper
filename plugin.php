@@ -29,8 +29,8 @@ function dfp_wallpaper_init() {
 		include( 'assets/class.dfp_wallpaper_ad.php' );
 		$wallpaper_ad          = new DFP_Wallpaper_Ad ( $dfp_ads );
 		$wallpaper_ad->dir_uri = plugins_url( null, __FILE__ );
-		$position_title        = dfp_get_settings_value( 'dfp_wallpaper_id' );
-		$wallpaper_position    = dfp_get_ad_position_by_name( $position_title );
+		$position_id           = dfp_get_settings_value( 'dfp_wallpaper_id' );
+		$wallpaper_position    = dfp_get_ad_position( $position_id );
 		if ( $wallpaper_position !== false ) {
 			$wallpaper_ad->ad_position( $wallpaper_position );
 		}
@@ -41,13 +41,24 @@ function dfp_wallpaper_init() {
 		// Adds Styles to head.
 		add_action( 'wp_head', array( $wallpaper_ad, 'css_style' ) );
 
+        /* Section headings */
+        add_filter( 'dfp_ads_settings_sections', ( function( $sections ) {
+            $sections['wallpaper_settings'] = array(
+                'id'    => 'wallpaper_settings',
+                'title' => 'Wallpaper Settings'
+            );
+
+            return $sections;
+        } ) );
+
 		/* Wallpaper Ad setting */
 		add_filter( 'dfp_ads_settings_fields', ( function ( $fields ) {
 			$fields['dfp_wallpaper_id'] = array(
 				'id'          => 'dfp_wallpaper_id',
 				'field'       => 'text',
+                'callback'    => 'ads_dropdown',
 				'title'       => 'Wallpaper Ad Title',
-				'section'     => 'general_settings',
+				'section'     => 'wallpaper_settings',
 				'description' => 'Enter the ad code for the wallpaper ad.'
 			);
 
