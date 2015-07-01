@@ -21,12 +21,26 @@
  * @subpackage        DFP-Ads-Wallpaper
  */
 
-function dfp_wallpaper_init() {
-	if ( class_exists( 'dfp_ads' ) ) {
+// Initialize
+include 'vendor/autoload.php';
 
+include 'includes/class.dfp_wallpaper_ad.php';
+
+/* Installs required plugins */
+include 'includes/class.dfp_ads_wallpaper_dependencies.php';
+$dfp_ads_dep = new DFP_Ads_Wallpaper_Dependencies;
+add_action( 'tgmpa_register', array( $dfp_ads_dep, 'register' ) );
+
+/** Wrapper function */
+function dfp_wallpaper_init() {
+	/* Checks if parent plugin is available */
+	/**
+	 * @TODO Integrate framework for creating plugin dependencies.
+	 */
+	if ( class_exists( 'dfp_ads' ) ) {
 		/** Queueing up the Wallpaper ad */
 		global $dfp_ads;
-		include( 'assets/class.dfp_wallpaper_ad.php' );
+		// Begin Logic
 		$wallpaper_ad          = new DFP_Wallpaper_Ad ( $dfp_ads );
 		$wallpaper_ad->dir_uri = plugins_url( null, __FILE__ );
 		$position_id           = dfp_get_settings_value( 'dfp_wallpaper_id' );
@@ -34,13 +48,10 @@ function dfp_wallpaper_init() {
 		if ( $wallpaper_position !== false ) {
 			$wallpaper_ad->ad_position( $wallpaper_position );
 		}
-
 		// Filter Ad Position into the DFP Ads object
 		add_filter( 'pre_dfp_ads_to_js', array( $wallpaper_ad, 'send_ads_to_js' ) );
-
 		// Adds Styles to head.
 		add_action( 'wp_head', array( $wallpaper_ad, 'css_style' ) );
-
         /* Section headings */
         add_filter( 'dfp_ads_settings_sections', ( function( $sections ) {
             $sections['wallpaper_settings'] = array(
@@ -50,7 +61,6 @@ function dfp_wallpaper_init() {
 
             return $sections;
         } ) );
-
 		/* Wallpaper Ad setting */
 		add_filter( 'dfp_ads_settings_fields', ( function ( $fields ) {
 			$fields['dfp_wallpaper_id'] = array(

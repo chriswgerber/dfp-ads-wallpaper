@@ -1,0 +1,14 @@
+{
+    "name": "thatgerber/dfp-ads-wallpaper",
+    "description": "Wallpaper Ad for WordPress",
+    "require-dev": {
+        "tgmpa/tgm-plugin-activation": "~2.4"
+    },
+    "license": "GPL-V2",
+    "authors": [
+        {
+            "name": "Chris W. Gerber",
+            "email": "chriswgerber@gmail.com"
+        }
+    ]
+}

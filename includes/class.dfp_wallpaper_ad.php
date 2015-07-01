@@ -92,7 +92,7 @@ class DFP_Wallpaper_Ad {
 		// Preps the script
 		wp_register_script(
 			$this->script_name,
-			$this->dir_uri . '/assets/dfp-wallpaper.js',
+			$this->dir_uri . '/assets/js/dfp-wallpaper.js',
 			array( $this->dfp_ads->script_name, 'jquery' ),
 			false,
 			false
