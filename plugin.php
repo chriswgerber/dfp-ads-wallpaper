@@ -1,10 +1,12 @@
 <?php
 /**
+ * DFP Wallpaper Ad Bootstrap File
+ *
  * @wordpress-plugin
- * Plugin Name:       DFP Ad Manager - Wallpaper Ad
+ * Plugin Name:       DFP Ad Manager - Wallpaper
  * Plugin URI:        http://www.chriswgerber.com/dfp-ads/wallpaper
  * Description:       Provides framework for Wallpaper Ad Position
- * Version:           0.1.0
+ * Version:           0.1.1
  * Author:            Chris W. Gerber
  * Author URI:        http://www.chriswgerber.com/
  * License:           GPL-2.0+
@@ -20,27 +22,23 @@
  * @since             0.1.0
  * @subpackage        DFP-Ads-Wallpaper
  */
-
+/* Wrapper Function */
 function dfp_wallpaper_init() {
-	if ( class_exists( 'dfp_ads' ) ) {
-
+	global $dfp_ads;
+	if ( $dfp_ads !== null ) {
 		/** Queueing up the Wallpaper ad */
-		global $dfp_ads;
-		include( 'assets/class.dfp_wallpaper_ad.php' );
-		$wallpaper_ad          = new DFP_Wallpaper_Ad ( $dfp_ads );
+		include 'includes/Wallpaper.php';
+		$wallpaper_ad          = new DFP_Ads\Ads\Wallpaper( $dfp_ads );
 		$wallpaper_ad->dir_uri = plugins_url( null, __FILE__ );
 		$position_id           = dfp_get_settings_value( 'dfp_wallpaper_id' );
 		$wallpaper_position    = dfp_get_ad_position( $position_id );
 		if ( $wallpaper_position !== false ) {
 			$wallpaper_ad->ad_position( $wallpaper_position );
 		}
-
 		// Filter Ad Position into the DFP Ads object
 		add_filter( 'pre_dfp_ads_to_js', array( $wallpaper_ad, 'send_ads_to_js' ) );
-
 		// Adds Styles to head.
 		add_action( 'wp_head', array( $wallpaper_ad, 'css_style' ) );
-
         /* Section headings */
         add_filter( 'dfp_ads_settings_sections', ( function( $sections ) {
             $sections['wallpaper_settings'] = array(
@@ -50,7 +48,6 @@ function dfp_wallpaper_init() {
 
             return $sections;
         } ) );
-
 		/* Wallpaper Ad setting */
 		add_filter( 'dfp_ads_settings_fields', ( function ( $fields ) {
 			$fields['dfp_wallpaper_id'] = array(
