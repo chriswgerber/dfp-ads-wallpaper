@@ -10,8 +10,12 @@
  * @package    WordPress
  * @subpackage DFP-Ads-Wallpaper
  */
+namespace DFP_Ads\Ads;
 
-class DFP_Wallpaper_Ad {
+use DFP_Ads\DFP_Ads as DFP_Ads;
+use DFP_Ads\Position as DFP_Ad_Position;
+
+class Wallpaper {
 
 	/**
 	 * Script Name
@@ -92,7 +96,7 @@ class DFP_Wallpaper_Ad {
 		// Preps the script
 		wp_register_script(
 			$this->script_name,
-			$this->dir_uri . '/assets/dfp-wallpaper.js',
+			$this->dir_uri . '/assets/js/dfp-wallpaper-ad.min.js',
 			array( $this->dfp_ads->script_name, 'jquery' ),
 			false,
 			false
